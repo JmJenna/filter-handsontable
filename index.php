@@ -38,6 +38,19 @@
     {available:1, users:'Claire', location:'los angeles', age:31},
     {available:0, users:'Jenny', location:'chicago', age:26},
     {available:0, users:'Tom', location:'new york', age:12},
+    {available:0, users:'Barle', location:'Boston', age:17},
+  ]
+  const aData1 = [
+    {available:1, users:'Claire', location:'los angeles', age:31},
+	{available:0, users:'Barle', location:'Boston', age:17},
+    {available:0, users:'Jenny', location:'chicago', age:26},
+    {available:0, users:'Tom', location:'new york', age:12},
+    {available:0, users:'Tom', location:'new york', age:12},
+    {available:0, users:'Tom', location:'new york', age:12},
+	{available:0, users:'Jenny', location:'chicago', age:26},
+    {available:0, users:'Tom', location:'new york', age:12},
+    {available:0, users:'Tom', location:'new york', age:12},
+	{available:0, users:'Jenny', location:'chicago', age:26},
   ]
   
   const columns = [
@@ -58,7 +71,7 @@ const hot = new Handsontable(container, {
  			 })
   
 const hot1 = new Handsontable(container1, { 
-			data: aData,
+			data: aData1,
 			columns: columns,
 			manualColumnResize: true,
 			dropdownMenu: true,
@@ -68,17 +81,17 @@ const hot1 = new Handsontable(container1, {
 })			
 
 let arr = [];
-let filtered ;
 const filtersPlugin = hot1.getPlugin('filters');
+
 hot.addHook('afterFilter', function(column, conditon, optional){
 	for(let row=0; row<hot.countRows(); row++){
 		let filtered = hot.getDataAtRowProp(row,'users')
 		arr.push(filtered)
 	}
 
-		filtersPlugin.clearConditions(0)
-		filtersPlugin.filter()
-		filtersPlugin.addCondition(0, 'by_value', [arr], 'conjunction');
+		filtersPlugin.clearConditions(0);
+		filtersPlugin.filter();
+		filtersPlugin.addCondition(0, 'by_value', [arr]);
 		filtersPlugin.filter();		
 		arr = [];
 })
