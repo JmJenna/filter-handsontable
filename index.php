@@ -54,6 +54,7 @@ const hot = new Handsontable(container, {
 			dropdownMenu: true,
 			dropdownMenu: ['filter_by_condition', 'filter_operators', 'filter_by_condition2','filter_by_value','filter_action_bar'],
 			filters: true,
+			licenseKey: 'non-commercial-and-evaluation',
  			 })
   
 const hot1 = new Handsontable(container1, { 
@@ -63,19 +64,21 @@ const hot1 = new Handsontable(container1, {
 			dropdownMenu: true,
 			dropdownMenu: ['filter_by_condition', 'filter_operators', 'filter_by_condition2','filter_by_value','filter_action_bar'],
 			filters: true,
+			licenseKey: 'non-commercial-and-evaluation',
 })			
 
 let arr = [];
 let filtered ;
-
+const filtersPlugin = hot1.getPlugin('filters');
 hot.addHook('afterFilter', function(column, conditon, optional){
 	for(let row=0; row<hot.countRows(); row++){
 		let filtered = hot.getDataAtRowProp(row,'users')
 		arr.push(filtered)
 	}
 
-	const filtersPlugin = hot1.getPlugin('filters');
-		filtersPlugin.addCondition(0, 'by_value', [arr],'conjunction');
+		filtersPlugin.clearConditions(0)
+		filtersPlugin.filter()
+		filtersPlugin.addCondition(0, 'by_value', [arr], 'conjunction');
 		filtersPlugin.filter();		
 		arr = [];
 })
