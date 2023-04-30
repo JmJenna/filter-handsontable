@@ -58,6 +58,12 @@
 	{  data: 'location', title:"Notes", width:200, readOnly: true},	
 	{  data: 'age', title:"age", width:200, readOnly: true},	
   ]
+  const columns1 = [
+	{  data: 'available', title:"User", width:100, readOnly: true, type:'checkbox',checkedTemplate:1, uncheckedTemplate:0},	
+	{  data: 'users', title:"User", width:100, readOnly: true},	
+	{  data: 'location', title:"Notes", width:200, readOnly: true},	
+	{  data: 'age', title:"age", width:200, readOnly: true},	
+  ]
   
   
 const hot = new Handsontable(container, { 
@@ -72,7 +78,7 @@ const hot = new Handsontable(container, {
   
 const hot1 = new Handsontable(container1, { 
 			data: aData1,
-			columns: columns,
+			columns: columns1,
 			manualColumnResize: true,
 			dropdownMenu: true,
 			dropdownMenu: ['filter_by_condition', 'filter_operators', 'filter_by_condition2','filter_by_value','filter_action_bar'],
@@ -89,9 +95,9 @@ hot.addHook('afterFilter', function(column, conditon, optional){
 		arr.push(filtered)
 	}
 
-		filtersPlugin.clearConditions(0);
+		filtersPlugin.clearConditions(1);
 		filtersPlugin.filter();
-		filtersPlugin.addCondition(0, 'by_value', [arr]);
+		filtersPlugin.addCondition(1, 'by_value', [arr]);
 		filtersPlugin.filter();		
 		arr = [];
 })
